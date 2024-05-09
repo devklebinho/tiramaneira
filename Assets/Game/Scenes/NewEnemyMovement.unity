@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed3b447f3e71e049b42446b9ae97ee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneTimer: 0
 --- !u!4 &795147315
 Transform:
   m_ObjectHideFlags: 0
@@ -464,7 +465,6 @@ MonoBehaviour:
   boundariesX: 7
   boundariesY: 3
   timerMovement: 0
-  TimerMovementCharacter: 0
 --- !u!114 &1765070825
 MonoBehaviour:
   m_ObjectHideFlags: 0
