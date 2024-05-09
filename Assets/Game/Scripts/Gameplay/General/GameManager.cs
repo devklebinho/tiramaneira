@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 /*Por enquanto, no GameManager, está sendo necessário uma definição de "timer" por cena, que será de acordo com a batida da música
@@ -5,12 +7,14 @@ using UnityEngine.SceneManagement;
  */
 public class GameManager : MonoBehaviour
 {
-    public float sceneTimer;
     int currentscene;
     PlayerScript PlayerCharacter;
     private static GameManager managerInstance;
+    public List<MoveScript> moveScripts;
+    public float bps, inputDelay;
+    public bool moveBool;
     private void Awake()
-    {
+    {        
         if (GameManager.managerInstance == null)
         {
             managerInstance = this;
@@ -20,19 +24,33 @@ public class GameManager : MonoBehaviour
             Destroy(GameManager.managerInstance);
         }
     }
-    public static GameManager instanceManager { get { return GameManager.managerInstance; } }
+    public static GameManager InstanceManager { get { return GameManager.managerInstance; } }
     void Start()
     {
         currentscene = SceneManager.GetActiveScene().buildIndex;
-        this.PlayerCharacter = PlayerScript.InstancePlayer;
         SetTimerMovement();
+        this.PlayerCharacter = PlayerScript.InstancePlayer;       
+        StartCoroutine(DanceRoutine());
+    }
+    IEnumerator DanceRoutine()
+    {
+        yield return new WaitForSeconds(bps);
+        moveBool = true;
+        yield return new WaitForSeconds(inputDelay);
+        foreach (MoveScript move in moveScripts)
+        {
+            move.Move();
+            moveBool = false;
+        }
+        StartCoroutine(DanceRoutine());
     }
     private void SetTimerMovement()
     {
         switch (currentscene)
         {
             case 1:
-                sceneTimer = 1f;
+                bps = 1f;
+                inputDelay = 1f;
                 break;
             case 2:
                 break;
