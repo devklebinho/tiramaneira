@@ -13,10 +13,10 @@ public class PlayerScript : MonoBehaviour
     BoxCollider2D myBodyCollider;
     [Header("References")]
     [SerializeField] float paddingLeft, paddingRight, paddingTop, paddingBottom, boundariesX, boundariesY, timerMovement;
-    public float TimerMovementCharacter;
     //Constants
     Vector2 moveInput, minBounds, maxBounds;
     private static PlayerScript playerInstance;
+    private static GameManager gameManager;
     private void Awake()
     {
         if (PlayerScript.playerInstance == null)
@@ -35,7 +35,8 @@ public class PlayerScript : MonoBehaviour
         myBodyCollider = GetComponent<BoxCollider2D>();
         SetUpMoveBoundaries();
 
-        timerMovement = TimerMovementCharacter;
+        gameManager = GameManager.instanceManager;
+        timerMovement = gameManager.sceneTimer;
 
     }
     void SetUpMoveBoundaries()
@@ -57,7 +58,7 @@ public class PlayerScript : MonoBehaviour
         if (timerMovement <= 0.01f)
         {
             Move();
-            timerMovement = TimerMovementCharacter;
+            timerMovement = gameManager.sceneTimer;
         }
     }
     void Move()
