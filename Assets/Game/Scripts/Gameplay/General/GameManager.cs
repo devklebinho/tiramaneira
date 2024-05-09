@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
  */
 public class GameManager : MonoBehaviour
 {
+    public float sceneTimer;
     int currentscene;
     PlayerScript PlayerCharacter;
     private static GameManager managerInstance;
@@ -31,8 +32,7 @@ public class GameManager : MonoBehaviour
         switch (currentscene)
         {
             case 1:
-                PlayerCharacter.TimerMovementCharacter = 3f;
-                //Setar o mesmo tempo nos inimigos aqui
+                sceneTimer = 1f;
                 break;
             case 2:
                 break;

@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    
     [SerializeField] List<Vector2> movementList;
     int cont = 0;
+    GameManager gameManager;
+
+    void Awake()
+    {
+        gameManager = GameManager.instanceManager;
+    }
+
     void Start()
     {
         //InvokeRepeating("EnemyMove", 0f, 0.5f);
         StartCoroutine(EnemyMove());
-    }
-
-    private void Update()
-    {
         
     }
-
 
     IEnumerator EnemyMove()
     {
@@ -33,7 +36,7 @@ public class EnemyMovement : MonoBehaviour
         }
         transform.Translate(movementList[cont].x, movementList[cont].y, 0f);
         cont++;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(gameManager.sceneTimer);
     }
 
 }
