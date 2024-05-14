@@ -244,8 +244,8 @@ MonoBehaviour:
   moveScripts:
   - {fileID: 1765070829}
   - {fileID: 9091013470348504764}
-  bps: 0
-  inputDelay: 0
+  bps: 0.5
+  inputDelay: 0.5
   moveBool: 0
 --- !u!4 &795147315
 Transform:
