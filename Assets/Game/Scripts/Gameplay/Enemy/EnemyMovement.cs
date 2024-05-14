@@ -9,7 +9,8 @@ using UnityEngine;
  */
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] List<Vector2> movementList;
+    [SerializeField] MovementData movementData;//scritableObject que contém a lista de movimentos
+    private List<Vector2> movementList;//lista interna de movimentos
     int cont;
     bool enemyCanWalkBool, isMoving;
     private static PlayerScript playerInstance;
@@ -17,6 +18,7 @@ public class EnemyMovement : MonoBehaviour
     private static MoveScript moveScriptInstance;
     void Start()
     {
+        movementList = movementData.GetMovementList();//Recebe a lista de movimentos do scritableObject
         gameManagerInstance = GameManager.InstanceManager;
         moveScriptInstance = this.GetComponent<MoveScript>();
         StartCoroutine(EnemyMove());

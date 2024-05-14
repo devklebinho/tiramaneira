@@ -49,8 +49,8 @@ public class GameManager : MonoBehaviour
         switch (currentscene)
         {
             case 1:
-                bps = 1f;
-                inputDelay = 1f;
+                bps = 0.5f;
+                inputDelay = 0.5f;
                 break;
             case 2:
                 break;
