@@ -12,7 +12,10 @@ public class GameManager : MonoBehaviour
     private static GameManager managerInstance;
     public List<MoveScript> moveScripts;
     public float bps, inputDelay;
+    [Range(0f, 10f)]
+    public float breathPoints;//NEW: Pontos de fôlego para decrementar a cada beat da música
     public bool moveBool;
+
     private void Awake()
     {        
         if (GameManager.managerInstance == null)
@@ -29,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         currentscene = SceneManager.GetActiveScene().buildIndex;
         SetTimerMovement();
-        this.PlayerCharacter = PlayerScript.InstancePlayer;       
+        this.PlayerCharacter = PlayerScript.InstancePlayer;
         StartCoroutine(DanceRoutine());
     }
     IEnumerator DanceRoutine()
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
         foreach (MoveScript move in moveScripts)
         {
             move.Move();
+            Breath.breathInstance.DecreaseBreath(breathPoints);//NEW: decrementa ponto de fôlego conforme o beat da música.
             moveBool = false;
         }
         StartCoroutine(DanceRoutine());
