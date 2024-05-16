@@ -40,20 +40,18 @@ public class Breath : MonoBehaviour
     /// <summary>
     /// Incrementa o fillAmount da imagem a cada chamada
     /// </summary> 
-    /// <param name="amount">float de 0 a 10</param>
+    /// <param name="amount"></param>
     public void IncreaseBreath(float amount)
     {
-        amount = amount / 100;
         breathBar.fillAmount += amount;
     }
 
     /// <summary>
     /// Decrementa o fillAmount da imagem a cada chamada
     /// </summary>
-    /// <param name="amount">float de 0 a 10</param>
+    /// <param name="amount"></param>
     public void DecreaseBreath(float amount)
     {
-        amount = amount / 100;
         breathBar.fillAmount -= amount;
     }
 }
