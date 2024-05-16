@@ -128,7 +128,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bombinha_0: -3430524540048111261
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
