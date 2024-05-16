@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private static GameManager managerInstance;
     public List<MoveScript> moveScripts;
     public float bps, inputDelay;
-    [Range(0f, 10f)]
+    [Range(0f, 1f)]
     public float breathPoints;//NEW: Pontos de fôlego para decrementar a cada beat da música
     public bool moveBool;
 
