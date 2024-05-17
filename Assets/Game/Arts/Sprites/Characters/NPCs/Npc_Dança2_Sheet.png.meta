@@ -46,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -84,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -200,7 +200,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "Npc_Dan\xE7a2_Sheet_0": -815928183488847773
+      "Npc_Dan\xE7a2_Sheet_1": -1897900195967693227
+      "Npc_Dan\xE7a2_Sheet_2": 2970846058088642745
+      "Npc_Dan\xE7a2_Sheet_3": 8975610549116340454
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
