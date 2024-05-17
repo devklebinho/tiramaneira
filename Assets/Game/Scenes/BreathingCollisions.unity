@@ -218,6 +218,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3329109383218962926, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3329109383218962926, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3329109383218962926, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -268,17 +276,14 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6593192686487236163, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1358218666}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
 --- !u!114 &329556241 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3105341010430371038, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
   m_PrefabInstance: {fileID: 329556240}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358218660}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d404f41ea37ceae4494fd604d0a3788f, type: 3}
@@ -680,24 +685,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inhaler: 1
---- !u!1 &1358218660 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6593192686487236163, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
-  m_PrefabInstance: {fileID: 329556240}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1358218666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358218660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e481bade91b0d4d9e358b04f1d8003, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0.551
 --- !u!1 &1665855916
 GameObject:
   m_ObjectHideFlags: 0

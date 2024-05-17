@@ -4,18 +4,20 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(MoveScript))]
-/* É necessário que os inimigos se movimentem através de uma lista de Vector2 garantindo que não vão atingir nenhum obstáculo ou passar de paredes. A lista será acessada por um outro Script
- * que dita a movimentação.
+/* ï¿½ necessï¿½rio que os inimigos se movimentem atravï¿½s de uma lista de Vector2 garantindo que nï¿½o vï¿½o atingir nenhum obstï¿½culo ou passar de paredes. A lista serï¿½ acessada por um outro Script
+ * que dita a movimentaï¿½ï¿½o.
  */
-public class EnemyMovement : MonoBehaviour
+public class EnemyScript : MonoBehaviour
 {
-    [SerializeField] MovementData movementData;//scritableObject que contém a lista de movimentos
+    [SerializeField] MovementData movementData;//scritableObject que contï¿½m a lista de movimentos
     private List<Vector2> movementList;//lista interna de movimentos
     int cont;
     bool enemyCanWalkBool, isMoving;
     private static PlayerScript playerInstance;
     private static GameManager gameManagerInstance;
     private static MoveScript moveScriptInstance;
+    [Range(0, 1)]
+    [SerializeField] float damage;
     void Start()
     {
         movementList = movementData.GetMovementList();//Recebe a lista de movimentos do scritableObject
@@ -48,5 +50,9 @@ public class EnemyMovement : MonoBehaviour
                 yield return null;
             }
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Breath.breathInstance.DecreaseBreath(damage);
     }
 }
