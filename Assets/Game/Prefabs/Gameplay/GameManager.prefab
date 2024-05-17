@@ -49,5 +49,5 @@ MonoBehaviour:
   - {fileID: 0}
   bps: 0.5
   inputDelay: 0.5
-  breathPoints: 3
+  breathPoints: 0.024
   moveBool: 0
