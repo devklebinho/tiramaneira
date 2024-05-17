@@ -15,8 +15,8 @@ TagManager:
   - UI
   - Enemies
   - Player
-  - 
-  - 
+  - Inhaler
+  - Obstacles
   - 
   - 
   - 
@@ -49,6 +49,12 @@ TagManager:
   - name: Enemies
     uniqueID: 2244115515
     locked: 0
+  - name: Obstacles
+    uniqueID: 2615884579
+    locked: 0
   - name: Player
     uniqueID: 1798530869
+    locked: 0
+  - name: Canvas
+    uniqueID: 3864292435
     locked: 0

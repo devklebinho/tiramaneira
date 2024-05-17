@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-/*Por enquanto, no GameManager, está sendo necessário uma definição de "timer" por cena, que será de acordo com a batida da música
+/*Por enquanto, no GameManager, estï¿½ sendo necessï¿½rio uma definiï¿½ï¿½o de "timer" por cena, que serï¿½ de acordo com a batida da mï¿½sica
 *para o personagem e os NPCs se movimentarem.
  */
 public class GameManager : MonoBehaviour
@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public List<MoveScript> moveScripts;
     public float bps, inputDelay;
     [Range(0f, 1f)]
-    public float breathPoints;//NEW: Pontos de fôlego para decrementar a cada beat da música
+    public float breathPoints;//NEW: Pontos de fï¿½lego para decrementar a cada beat da mï¿½sica
     public bool moveBool;
 
     private void Awake()
@@ -38,12 +38,12 @@ public class GameManager : MonoBehaviour
     IEnumerator DanceRoutine()
     {
         yield return new WaitForSeconds(bps);
-        moveBool = true;
+        moveBool = true;    
         yield return new WaitForSeconds(inputDelay);
+        Breath.breathInstance.DecreaseBreath(breathPoints);//NEW: decrementa ponto de fï¿½lego conforme o beat da mï¿½sica.
         foreach (MoveScript move in moveScripts)
         {
-            move.Move();
-            Breath.breathInstance.DecreaseBreath(breathPoints);//NEW: decrementa ponto de fôlego conforme o beat da música.
+            move.Move();            
             moveBool = false;
         }
         StartCoroutine(DanceRoutine());

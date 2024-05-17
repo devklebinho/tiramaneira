@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35a1623efc1ee1408d5afbab25e6000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementData: {fileID: 11400000, guid: 3c29525ded1ea7b4e9f1d1c94257c868, type: 2}
+  movementData: {fileID: 11400000, guid: ffcd72fbe63e07a49b55685534298843, type: 2}
+  damage: 0.2
 --- !u!114 &3105341010430371038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +176,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.07814333, y: 0.030389085}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -185,5 +186,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.67006165, y: 0.6179662}
   m_EdgeRadius: 0
