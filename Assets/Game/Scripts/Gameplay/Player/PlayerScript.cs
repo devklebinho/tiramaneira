@@ -25,33 +25,20 @@ public class PlayerScript : MonoBehaviour
     Vector2 moveInput, minBounds, maxBounds;
     float countdownRestart = 2f;
     [SerializeField] Vector3[] obstaclesGameObjectsVectors;
-    private static PlayerScript playerInstance;
-    private static GameManager gameManagerInstance;
-    private static MoveScript moveScriptInstance;
-    private static Breath breathScriptInstance;
-    private void Awake()
-    {
-        if (PlayerScript.playerInstance == null)
-        {
-            playerInstance = this;
-        }
-        else
-        {
-            Destroy(PlayerScript.playerInstance);
-        }
-        gameManagerInstance = GameManager.InstanceManager;
-        breathScriptInstance = Breath.breathInstance;
-        moveScriptInstance = this.GetComponent<MoveScript>();
-    }
-    public static PlayerScript InstancePlayer { get { return PlayerScript.playerInstance; } }
+    private MoveScript moveScriptInstance;
+    private Breath breath;
+
     void Start()
     {
+        breath = FindFirstObjectByType<Breath>();
+        moveScriptInstance = GetComponent<MoveScript>();
         myRigidbody = GetComponent<Rigidbody2D>();
         myBodyCollider = GetComponent<BoxCollider2D>();
         myAnimator = GetComponent<Animator>();
         withoutObstacles = true;
         SetUpMoveBoundaries();
         SetUpObstacles();
+        ableToWalk = true;
     }
     void SetUpMoveBoundaries()
     {
@@ -72,11 +59,6 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         ConstantBoudaries();
-        DeathState();
-        if (!isDeadBool) //Stop Walk
-        {            
-            ableToWalk = gameManagerInstance.moveBool;
-        }
     }
     void OnMovement(InputValue value)
     {
@@ -104,26 +86,26 @@ public class PlayerScript : MonoBehaviour
             if (ableToWalk && withoutObstacles)
             {
                 moveScriptInstance.receptMove(moveInput);
-                yield return new WaitForSeconds(gameManagerInstance.bps);
+                yield return new WaitForSeconds(GameManager.InstanceManager.bps);
                 myAnimator.SetTrigger("WalkAnim");
                 moveInput = Vector2.zero;
                 moveScriptInstance.receptMove(moveInput);
                 yield return new WaitForSeconds(1f);
             }
         }
-    }   
-    private void DeathState()
+    }
+    public void DeathState()
     {
-        if (breathScriptInstance.breathBar.fillAmount <= 0)
-        {
-            myAnimator.SetBool("AsthmaAnim", true);            
-            isDeadBool = true;
-            countdownRestart -= Time.deltaTime;            
-            if(countdownRestart <= 0f) //Restart Scene
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-        }
+        ableToWalk = false;
+        myAnimator.SetBool("AsthmaAnim", true);
+        isDeadBool = true;
+        StartCoroutine(RestarScene());
+    }
+
+    IEnumerator RestarScene()
+    {
+        yield return new WaitForSeconds(countdownRestart);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     private void ConstantBoudaries()
     {
@@ -131,5 +113,13 @@ public class PlayerScript : MonoBehaviour
         newPos.x = Mathf.Clamp(transform.position.x, minBounds.x + paddingLeft, maxBounds.x - paddingRight);
         newPos.y = Mathf.Clamp(transform.position.y, minBounds.y + paddingBottom, maxBounds.y - paddingTop);
         transform.position = newPos;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            breath.DecreaseBreath(collision.GetComponent<EnemyScript>().damage);
+        }
     }
 }

@@ -6,31 +6,12 @@ public class Breath : MonoBehaviour
 {
     //A barra de f�lego (pulm�o) s� pode ser preenchida com valores entre 0 e 1
     [SerializeField] public Image breathBar;
-    //Singleton
-    public static Breath breathInstance;
-    void Awake()
-    {
-        if (Breath.breathInstance == null)
-        {
-            breathInstance = this;
-        }
-        else
-        {
-            Destroy(Breath.breathInstance);
-        }
-    }
-    public static Breath InstanceBreath { get { return Breath.breathInstance; } }
-    //end Singleton
+    private PlayerScript playerScript;
+
     void Start()
     {
+        playerScript = FindFirstObjectByType<PlayerScript>();
         breathBar.fillAmount = 1f;//Pulm�o cheio
-    }
-    private void Update()
-    {
-        //if (breathBar.fillAmount <= 0f)
-        //{
-        //    Debug.Log("Cabou o ar!");
-        //}
     }
     /// <summary>
     /// Incrementa o fillAmount da imagem a cada chamada
@@ -47,5 +28,10 @@ public class Breath : MonoBehaviour
     public void DecreaseBreath(float amount)
     {
         breathBar.fillAmount -= amount;
+        
+        if (breathBar.fillAmount <= 0)
+        {
+            playerScript.DeathState();
+        }
     }
 }
