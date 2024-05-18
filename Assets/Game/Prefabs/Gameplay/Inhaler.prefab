@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6477961524529824022}
   - component: {fileID: 6507034510270027264}
   - component: {fileID: 2804101252683868609}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inhaler
   m_TagString: Inhaler
   m_Icon: {fileID: 0}
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2050851781
-  m_SortingLayer: 2
+  m_SortingLayerID: 92516725
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -3430524540048111261, guid: 3da682d21f5446a48bf1f073e0901627, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -120,7 +120,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.10345006, y: 0.12931237}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,7 +130,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2, y: 4.5}
+  m_Size: {x: 1.7930999, y: 2.2241051}
   m_EdgeRadius: 0
 --- !u!114 &2804101252683868609
 MonoBehaviour:
