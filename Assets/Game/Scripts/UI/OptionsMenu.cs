@@ -21,6 +21,7 @@ public class OptionsMenu : MonoBehaviour
 
         selectedResolution = 0;
         UpdateResolutionLabel();
+        txtResolutionFormat.text = Screen.width + "x" + Screen.height;
     }
 
     void Update()
@@ -31,7 +32,7 @@ public class OptionsMenu : MonoBehaviour
     public void ApplyGraphics()
     {
         Debug.Log("Apply Graphics");
-        Screen.fullScreen = fullscreenToggle.isOn;
+//        Screen.fullScreen = fullscreenToggle.isOn;
         QualitySettings.vSyncCount = vSyncToggle.isOn ? 1 : 0;//operador ternário
         Screen.SetResolution(resolutions[selectedResolution].hResolution, resolutions[selectedResolution].vResolution, fullscreenToggle.isOn);
     }
