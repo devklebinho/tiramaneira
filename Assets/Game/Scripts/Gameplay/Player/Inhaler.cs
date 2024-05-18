@@ -14,8 +14,12 @@ public class Inhaler : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        breath.IncreaseBreath(inhaler);
-        PlayerCharacter.GetComponent<Animator>().SetTrigger("BombAnim");
-        Destroy(gameObject);
+        if (collision.CompareTag("Player"))
+        {
+            breath.IncreaseBreath(inhaler);
+            PlayerCharacter.GetComponent<Animator>().SetTrigger("BombAnim");
+            Destroy(gameObject);
+        }
+
     }
 }

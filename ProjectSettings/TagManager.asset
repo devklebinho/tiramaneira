@@ -52,6 +52,9 @@ TagManager:
   - name: Obstacles
     uniqueID: 2615884579
     locked: 0
+  - name: Inhaler
+    uniqueID: 92516725
+    locked: 0
   - name: Player
     uniqueID: 1798530869
     locked: 0
