@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(MoveScript))]
+[RequireComponent(typeof(Animator))]
 /*� necess�rio um script para o player se movimentar em 4 dire��es e essa movimenta��o ser� liberada ap�s um determinado per�odo de tempo.
  *Tamb�m s�o necess�rios limitadores do espa�o de movimento para que o personagem n�o passe do cen�rio.
  *Futuramente ser� implementado a rea��o do personagem quanto aos NPCs e aos obst�culos no cen�rio.
@@ -13,17 +15,20 @@ public class PlayerScript : MonoBehaviour
     [Header("Essentials")]
     Rigidbody2D myRigidbody;
     BoxCollider2D myBodyCollider;
+    Animator myAnimator;
     [Header("References")]
     [SerializeField] float paddingLeft, paddingRight, paddingTop, paddingBottom, boundariesX, boundariesY, timerMovement;
-    public bool ableToWalk, withoutObstacles;
+    public bool ableToWalk, withoutObstacles, isDeadBool;
     [SerializeField] GameObject obstaclesParent;
     [SerializeField] Transform[] obstaclesGameObjects;
     //Constants
     Vector2 moveInput, minBounds, maxBounds;
+    float countdownRestart = 2f;
     [SerializeField] Vector3[] obstaclesGameObjectsVectors;
     private static PlayerScript playerInstance;
     private static GameManager gameManagerInstance;
     private static MoveScript moveScriptInstance;
+    private static Breath breathScriptInstance;
     private void Awake()
     {
         if (PlayerScript.playerInstance == null)
@@ -35,6 +40,7 @@ public class PlayerScript : MonoBehaviour
             Destroy(PlayerScript.playerInstance);
         }
         gameManagerInstance = GameManager.InstanceManager;
+        breathScriptInstance = Breath.breathInstance;
         moveScriptInstance = this.GetComponent<MoveScript>();
     }
     public static PlayerScript InstancePlayer { get { return PlayerScript.playerInstance; } }
@@ -42,6 +48,7 @@ public class PlayerScript : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myBodyCollider = GetComponent<BoxCollider2D>();
+        myAnimator = GetComponent<Animator>();
         withoutObstacles = true;
         SetUpMoveBoundaries();
         SetUpObstacles();
@@ -65,7 +72,11 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         ConstantBoudaries();
-        ableToWalk = gameManagerInstance.moveBool;
+        DeathState();
+        if (!isDeadBool) //Stop Walk
+        {            
+            ableToWalk = gameManagerInstance.moveBool;
+        }
     }
     void OnMovement(InputValue value)
     {
@@ -84,17 +95,33 @@ public class PlayerScript : MonoBehaviour
                 {
                     withoutObstacles = false;
                     break;
-                } else
+                }
+                else
                 {
                     withoutObstacles = true;
                 }
             }
-            if (withoutObstacles)
+            if (ableToWalk && withoutObstacles)
             {
                 moveScriptInstance.receptMove(moveInput);
                 yield return new WaitForSeconds(gameManagerInstance.bps);
+                myAnimator.SetTrigger("WalkAnim");
                 moveInput = Vector2.zero;
                 moveScriptInstance.receptMove(moveInput);
+                yield return new WaitForSeconds(1f);
+            }
+        }
+    }   
+    private void DeathState()
+    {
+        if (breathScriptInstance.breathBar.fillAmount <= 0)
+        {
+            myAnimator.SetBool("AsthmaAnim", true);            
+            isDeadBool = true;
+            countdownRestart -= Time.deltaTime;            
+            if(countdownRestart <= 0f) //Restart Scene
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
     }

@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class Breath : MonoBehaviour
 {
     //A barra de f�lego (pulm�o) s� pode ser preenchida com valores entre 0 e 1
-    [SerializeField] Image breathBar;
+    [SerializeField] public Image breathBar;
     //Singleton
     public static Breath breathInstance;
     void Awake()
     {
-        if(Breath.breathInstance == null)
+        if (Breath.breathInstance == null)
         {
             breathInstance = this;
         }
@@ -19,6 +19,7 @@ public class Breath : MonoBehaviour
             Destroy(Breath.breathInstance);
         }
     }
+    public static Breath InstanceBreath { get { return Breath.breathInstance; } }
     //end Singleton
     void Start()
     {
@@ -26,10 +27,10 @@ public class Breath : MonoBehaviour
     }
     private void Update()
     {
-        if(breathBar.fillAmount <= 0f)
-        {
-            Debug.Log("Cabou o ar!");
-        }
+        //if (breathBar.fillAmount <= 0f)
+        //{
+        //    Debug.Log("Cabou o ar!");
+        //}
     }
     /// <summary>
     /// Incrementa o fillAmount da imagem a cada chamada

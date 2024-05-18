@@ -186,7 +186,7 @@ SpriteRenderer:
   m_Size: {x: 1.111111, y: 1.111111}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &20949857
@@ -3729,6 +3729,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3329109383218962926, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3329109383218962926, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3329109383218962926, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -3778,19 +3786,47 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: ffcd72fbe63e07a49b55685534298843, type: 2}
     - target: {fileID: 6219866223771138080, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
       propertyPath: m_Size.x
-      value: 0.67006165
+      value: 0.23
       objectReference: {fileID: 0}
     - target: {fileID: 6219866223771138080, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
       propertyPath: m_Size.y
-      value: 0.6179662
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 6219866223771138080, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
       propertyPath: m_Offset.x
-      value: 0.07814333
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6219866223771138080, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
       propertyPath: m_Offset.y
-      value: 0.030389085
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219866223771138080, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219866223771138080, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219866223771138080, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573046133463121904, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -815928183488847773, guid: 09ac6ce866d8f8f4aa17a796248edd27, type: 3}
+    - target: {fileID: 6573046133463121904, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573046133463121904, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573046133463121904, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6593192686487236163, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
       propertyPath: m_Name
@@ -4029,13 +4065,29 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6507034510270027264, guid: b933b8e2dd9d5c14e93ef9d6a201e8ff, type: 3}
+      propertyPath: m_Size.x
+      value: 1.7930999
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507034510270027264, guid: b933b8e2dd9d5c14e93ef9d6a201e8ff, type: 3}
+      propertyPath: m_Size.y
+      value: 2.2241051
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507034510270027264, guid: b933b8e2dd9d5c14e93ef9d6a201e8ff, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507034510270027264, guid: b933b8e2dd9d5c14e93ef9d6a201e8ff, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7241103104729844940, guid: b933b8e2dd9d5c14e93ef9d6a201e8ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.022
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7241103104729844940, guid: b933b8e2dd9d5c14e93ef9d6a201e8ff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.959
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7241103104729844940, guid: b933b8e2dd9d5c14e93ef9d6a201e8ff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4155,7 +4207,7 @@ SpriteRenderer:
   m_Size: {x: 1.111111, y: 1.111111}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &795147313
@@ -4192,7 +4244,7 @@ MonoBehaviour:
   - {fileID: 1454260515}
   bps: 0.5
   inputDelay: 0.5
-  breathPoints: 0.061
+  breathPoints: 0.261
   moveBool: 0
 --- !u!4 &795147315
 Transform:
@@ -4346,7 +4398,7 @@ SpriteRenderer:
   m_Size: {x: 1.111111, y: 1.111111}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1665855916
@@ -4578,6 +4630,11 @@ MonoBehaviour:
   boundariesY: 3
   timerMovement: 0
   ableToWalk: 0
+  withoutObstacles: 0
+  isDeadBool: 0
+  obstaclesParent: {fileID: 0}
+  obstaclesGameObjects: []
+  obstaclesGameObjectsVectors: []
 --- !u!114 &1765070825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4642,17 +4699,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.007265091, y: -0.38504547}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.41666666, y: 1}
+    oldSize: {x: 0.33333334, y: 0.8}
     newSize: {x: 7.58, y: 7.77}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.81110954, y: 0.7965797}
+  m_Size: {x: 0.3, y: 0.5}
   m_EdgeRadius: 0
 --- !u!50 &1765070827
 Rigidbody2D:
@@ -4849,7 +4906,7 @@ SpriteRenderer:
   m_Size: {x: 1.111111, y: 1.111111}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1660057539 &9223372036854775807
