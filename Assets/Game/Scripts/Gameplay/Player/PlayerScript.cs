@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(MoveScript))]
+[RequireComponent(typeof(Animator))]
 /*� necess�rio um script para o player se movimentar em 4 dire��es e essa movimenta��o ser� liberada ap�s um determinado per�odo de tempo.
  *Tamb�m s�o necess�rios limitadores do espa�o de movimento para que o personagem n�o passe do cen�rio.
  *Futuramente ser� implementado a rea��o do personagem quanto aos NPCs e aos obst�culos no cen�rio.
@@ -13,38 +15,30 @@ public class PlayerScript : MonoBehaviour
     [Header("Essentials")]
     Rigidbody2D myRigidbody;
     BoxCollider2D myBodyCollider;
+    Animator myAnimator;
     [Header("References")]
     [SerializeField] float paddingLeft, paddingRight, paddingTop, paddingBottom, boundariesX, boundariesY, timerMovement;
-    public bool ableToWalk, withoutObstacles;
+    public bool ableToWalk, withoutObstacles, isDeadBool;
     [SerializeField] GameObject obstaclesParent;
     [SerializeField] Transform[] obstaclesGameObjects;
     //Constants
     Vector2 moveInput, minBounds, maxBounds;
+    float countdownRestart = 2f;
     [SerializeField] Vector3[] obstaclesGameObjectsVectors;
-    private static PlayerScript playerInstance;
-    private static GameManager gameManagerInstance;
-    private static MoveScript moveScriptInstance;
-    private void Awake()
-    {
-        if (PlayerScript.playerInstance == null)
-        {
-            playerInstance = this;
-        }
-        else
-        {
-            Destroy(PlayerScript.playerInstance);
-        }
-        gameManagerInstance = GameManager.InstanceManager;
-        moveScriptInstance = this.GetComponent<MoveScript>();
-    }
-    public static PlayerScript InstancePlayer { get { return PlayerScript.playerInstance; } }
+    private MoveScript moveScriptInstance;
+    private Breath breath;
+
     void Start()
     {
+        breath = FindFirstObjectByType<Breath>();
+        moveScriptInstance = GetComponent<MoveScript>();
         myRigidbody = GetComponent<Rigidbody2D>();
         myBodyCollider = GetComponent<BoxCollider2D>();
+        myAnimator = GetComponent<Animator>();
         withoutObstacles = true;
         SetUpMoveBoundaries();
         SetUpObstacles();
+        ableToWalk = true;
     }
     void SetUpMoveBoundaries()
     {
@@ -65,7 +59,6 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         ConstantBoudaries();
-        ableToWalk = gameManagerInstance.moveBool;
     }
     void OnMovement(InputValue value)
     {
@@ -84,19 +77,35 @@ public class PlayerScript : MonoBehaviour
                 {
                     withoutObstacles = false;
                     break;
-                } else
+                }
+                else
                 {
                     withoutObstacles = true;
                 }
             }
-            if (withoutObstacles)
+            if (ableToWalk && withoutObstacles)
             {
                 moveScriptInstance.receptMove(moveInput);
-                yield return new WaitForSeconds(gameManagerInstance.bps);
+                yield return new WaitForSeconds(GameManager.InstanceManager.bps);
+                myAnimator.SetTrigger("WalkAnim");
                 moveInput = Vector2.zero;
                 moveScriptInstance.receptMove(moveInput);
+                yield return new WaitForSeconds(1f);
             }
         }
+    }
+    public void DeathState()
+    {
+        ableToWalk = false;
+        myAnimator.SetBool("AsthmaAnim", true);
+        isDeadBool = true;
+        StartCoroutine(RestarScene());
+    }
+
+    IEnumerator RestarScene()
+    {
+        yield return new WaitForSeconds(countdownRestart);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     private void ConstantBoudaries()
     {
@@ -104,5 +113,13 @@ public class PlayerScript : MonoBehaviour
         newPos.x = Mathf.Clamp(transform.position.x, minBounds.x + paddingLeft, maxBounds.x - paddingRight);
         newPos.y = Mathf.Clamp(transform.position.y, minBounds.y + paddingBottom, maxBounds.y - paddingTop);
         transform.position = newPos;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            breath.DecreaseBreath(collision.GetComponent<EnemyScript>().damage);
+        }
     }
 }

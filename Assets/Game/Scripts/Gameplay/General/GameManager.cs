@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 /*Por enquanto, no GameManager, est� sendo necess�rio uma defini��o de "timer" por cena, que ser� de acordo com a batida da m�sica
@@ -8,9 +9,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     int currentscene;
-    PlayerScript PlayerCharacter;
     private static GameManager managerInstance;
     public List<MoveScript> moveScripts;
+    public Breath breath;
     public float bps, inputDelay;
     [Range(0f, 1f)]
     public float breathPoints;//NEW: Pontos de f�lego para decrementar a cada beat da m�sica
@@ -18,21 +19,22 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {        
-        if (GameManager.managerInstance == null)
+        if (managerInstance == null)
         {
             managerInstance = this;
         }
         else
         {
-            Destroy(GameManager.managerInstance);
+            Destroy(managerInstance);
         }
     }
     public static GameManager InstanceManager { get { return GameManager.managerInstance; } }
     void Start()
     {
+        breath = FindFirstObjectByType<Breath>();
+        moveScripts = FindObjectsByType<MoveScript>(FindObjectsSortMode.None).ToList();
         currentscene = SceneManager.GetActiveScene().buildIndex;
         SetTimerMovement();
-        this.PlayerCharacter = PlayerScript.InstancePlayer;
         StartCoroutine(DanceRoutine());
     }
     IEnumerator DanceRoutine()
@@ -40,7 +42,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(bps);
         moveBool = true;    
         yield return new WaitForSeconds(inputDelay);
-        Breath.breathInstance.DecreaseBreath(breathPoints);//NEW: decrementa ponto de f�lego conforme o beat da m�sica.
+        breath.DecreaseBreath(breathPoints);//NEW: decrementa ponto de f�lego conforme o beat da m�sica.
         foreach (MoveScript move in moveScripts)
         {
             move.Move();            

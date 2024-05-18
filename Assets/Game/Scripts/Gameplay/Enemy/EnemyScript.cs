@@ -11,48 +11,26 @@ public class EnemyScript : MonoBehaviour
 {
     [SerializeField] MovementData movementData;//scritableObject que cont�m a lista de movimentos
     private List<Vector2> movementList;//lista interna de movimentos
+    [SerializeField]
     int cont;
-    bool enemyCanWalkBool, isMoving;
-    private static PlayerScript playerInstance;
-    private static GameManager gameManagerInstance;
-    private static MoveScript moveScriptInstance;
+    private MoveScript moveScriptInstance;
     [Range(0, 1)]
-    [SerializeField] float damage;
+    public float damage;
     void Start()
     {
         movementList = movementData.GetMovementList();//Recebe a lista de movimentos do scritableObject
-        gameManagerInstance = GameManager.InstanceManager;
-        moveScriptInstance = this.GetComponent<MoveScript>();
+        moveScriptInstance = GetComponent<MoveScript>();
         StartCoroutine(EnemyMove());
-    }
-    private void Update()
-    {
-        enemyCanWalkBool = gameManagerInstance.moveBool;
     }
     IEnumerator EnemyMove()
     {
-        while (true)
+        moveScriptInstance.receptMove(movementList[cont]);
+        cont++;
+        if (cont >= movementList.Count)
         {
-            if (enemyCanWalkBool && !isMoving)
-            {
-                isMoving = true;
-                moveScriptInstance.receptMove(movementList[cont]);
-                cont++;
-                if (cont >= movementList.Count)
-                {
-                    cont = 0;
-                }
-                yield return new WaitForSeconds(gameManagerInstance.bps);
-                isMoving = false;
-            }
-            else
-            {
-                yield return null;
-            }
+            cont = 0;
         }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Breath.breathInstance.DecreaseBreath(damage);
+        yield return new WaitForSeconds(GameManager.InstanceManager.bps+GameManager.InstanceManager.inputDelay);
+        StartCoroutine(EnemyMove());    
     }
 }
