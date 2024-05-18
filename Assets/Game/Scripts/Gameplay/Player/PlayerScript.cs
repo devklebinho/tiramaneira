@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(MoveScript))]
-/*É necessário um script para o player se movimentar em 4 direções e essa movimentação será liberada após um determinado período de tempo.
- *Também são necessários limitadores do espaço de movimento para que o personagem não passe do cenário.
- *Futuramente será implementado a reação do personagem quanto aos NPCs e aos obstáculos no cenário.
+/*ï¿½ necessï¿½rio um script para o player se movimentar em 4 direï¿½ï¿½es e essa movimentaï¿½ï¿½o serï¿½ liberada apï¿½s um determinado perï¿½odo de tempo.
+ *Tambï¿½m sï¿½o necessï¿½rios limitadores do espaï¿½o de movimento para que o personagem nï¿½o passe do cenï¿½rio.
+ *Futuramente serï¿½ implementado a reaï¿½ï¿½o do personagem quanto aos NPCs e aos obstï¿½culos no cenï¿½rio.
  */
 public class PlayerScript : MonoBehaviour
 {
@@ -15,9 +15,12 @@ public class PlayerScript : MonoBehaviour
     BoxCollider2D myBodyCollider;
     [Header("References")]
     [SerializeField] float paddingLeft, paddingRight, paddingTop, paddingBottom, boundariesX, boundariesY, timerMovement;
-    public bool ableToWalk;
+    public bool ableToWalk, withoutObstacles;
+    [SerializeField] GameObject obstaclesParent;
+    [SerializeField] Transform[] obstaclesGameObjects;
     //Constants
     Vector2 moveInput, minBounds, maxBounds;
+    [SerializeField] Vector3[] obstaclesGameObjectsVectors;
     private static PlayerScript playerInstance;
     private static GameManager gameManagerInstance;
     private static MoveScript moveScriptInstance;
@@ -33,17 +36,31 @@ public class PlayerScript : MonoBehaviour
         }
         gameManagerInstance = GameManager.InstanceManager;
         moveScriptInstance = this.GetComponent<MoveScript>();
-    }    public static PlayerScript InstancePlayer { get { return PlayerScript.playerInstance; } }
+    }
+    public static PlayerScript InstancePlayer { get { return PlayerScript.playerInstance; } }
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myBodyCollider = GetComponent<BoxCollider2D>();
+        withoutObstacles = true;
         SetUpMoveBoundaries();
+        SetUpObstacles();
     }
     void SetUpMoveBoundaries()
     {
         minBounds = new Vector2(-boundariesX, -boundariesY);
         maxBounds = new Vector2(boundariesX, boundariesY);
+    }
+    void SetUpObstacles()
+    {
+        obstaclesParent = GameObject.Find("ObstaclesGroup");
+        obstaclesGameObjects = new Transform[obstaclesParent.transform.childCount];
+        obstaclesGameObjectsVectors = new Vector3[obstaclesParent.transform.childCount];
+        for (int i = 0; i < obstaclesParent.transform.childCount; i++)
+        {
+            obstaclesGameObjects[i] = obstaclesParent.transform.GetChild(i);
+            obstaclesGameObjectsVectors[i] = obstaclesGameObjects[i].transform.position;
+        }
     }
     void Update()
     {
@@ -57,12 +74,28 @@ public class PlayerScript : MonoBehaviour
     }
     IEnumerator MovePlayer()
     {
-        if (moveInput != Vector2.zero && ableToWalk)
+        if (moveInput != Vector2.zero)
         {
-            moveScriptInstance.receptMove(moveInput);
-            yield return new WaitForSeconds(gameManagerInstance.bps);
-            moveInput = Vector2.zero;
-            moveScriptInstance.receptMove(moveInput);
+            var nextMove = (Vector2)transform.position + moveInput;
+
+            foreach (var positionsObstacles in obstaclesGameObjectsVectors)
+            {
+                if (nextMove == (Vector2)positionsObstacles)
+                {
+                    withoutObstacles = false;
+                    break;
+                } else
+                {
+                    withoutObstacles = true;
+                }
+            }
+            if (withoutObstacles)
+            {
+                moveScriptInstance.receptMove(moveInput);
+                yield return new WaitForSeconds(gameManagerInstance.bps);
+                moveInput = Vector2.zero;
+                moveScriptInstance.receptMove(moveInput);
+            }
         }
     }
     private void ConstantBoudaries()
