@@ -20,17 +20,15 @@ public class EnemyScript : MonoBehaviour
     {
         movementList = movementData.GetMovementList();//Recebe a lista de movimentos do scritableObject
         moveScriptInstance = GetComponent<MoveScript>();
-        StartCoroutine(EnemyMove());
+
     }
-    IEnumerator EnemyMove()
+    public void EnemyMove()
     {
         moveScriptInstance.receptMove(movementList[cont]);
         cont++;
         if (cont >= movementList.Count)
         {
             cont = 0;
-        }
-        yield return new WaitForSeconds(GameManager.InstanceManager.bps+GameManager.InstanceManager.inputDelay);
-        StartCoroutine(EnemyMove());    
+        } 
     }
 }

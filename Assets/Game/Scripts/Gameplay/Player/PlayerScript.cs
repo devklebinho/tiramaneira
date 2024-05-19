@@ -27,9 +27,11 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] Vector3[] obstaclesGameObjectsVectors;
     private MoveScript moveScriptInstance;
     private Breath breath;
+    private MusicManager musicManager;
 
     void Start()
     {
+        musicManager = FindAnyObjectByType<MusicManager>();
         breath = FindFirstObjectByType<Breath>();
         moveScriptInstance = GetComponent<MoveScript>();
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -59,13 +61,17 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         ConstantBoudaries();
+        /*if (Input.GetButtonDown("Fire1"))
+        {
+            GetComponent<SpriteRenderer>().enabled = !GetComponent<SpriteRenderer>().enabled;
+        }*/
     }
     void OnMovement(InputValue value)
     {
         moveInput = value.Get<Vector2>();
-        StartCoroutine(MovePlayer());
+        MovePlayer();
     }
-    IEnumerator MovePlayer()
+    public void MovePlayer()
     {
         if (moveInput != Vector2.zero)
         {
@@ -83,14 +89,13 @@ public class PlayerScript : MonoBehaviour
                     withoutObstacles = true;
                 }
             }
-            if (ableToWalk && withoutObstacles)
+            //Debug.Log(musicManager.GetMusicTime() < GameManager.InstanceManager.lastBeatTime + GameManager.InstanceManager.beatInterval - GameManager.InstanceManager.playerMoveTolerance);
+            bool canMove = musicManager.GetMusicTime() < GameManager.InstanceManager.lastBeatTime + GameManager.InstanceManager.beatInterval - GameManager.InstanceManager.playerMoveTolerance;
+
+            if (ableToWalk && withoutObstacles && canMove)
             {
                 moveScriptInstance.receptMove(moveInput);
-                yield return new WaitForSeconds(GameManager.InstanceManager.bps);
                 myAnimator.SetTrigger("WalkAnim");
-                moveInput = Vector2.zero;
-                moveScriptInstance.receptMove(moveInput);
-                yield return new WaitForSeconds(1f);
             }
         }
     }

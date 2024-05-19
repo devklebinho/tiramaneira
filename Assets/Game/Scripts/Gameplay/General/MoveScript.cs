@@ -1,5 +1,5 @@
 using UnityEngine;
-/* Necessário executar o movimento dos elementos da cena, tanto NPCs quanto o player assim que for comandado.
+/* Necessï¿½rio executar o movimento dos elementos da cena, tanto NPCs quanto o player assim que for comandado.
  */
 public class MoveScript : MonoBehaviour
 {
@@ -11,5 +11,6 @@ public class MoveScript : MonoBehaviour
     public void Move()
     {
         transform.Translate(intentDirection);
+        intentDirection = Vector2.zero;
     }
 }

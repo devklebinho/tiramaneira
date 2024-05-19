@@ -94,6 +94,30 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -633,31 +657,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "Tileset_ch\xE3o_0": 921080921
-      "Tileset_ch\xE3o_1": 1442653564
-      "Tileset_ch\xE3o_10": -1374979548
-      "Tileset_ch\xE3o_11": 718665255
-      "Tileset_ch\xE3o_12": -1017670803
-      "Tileset_ch\xE3o_13": 833809664
-      "Tileset_ch\xE3o_14": -2039035336
-      "Tileset_ch\xE3o_15": 982560431
-      "Tileset_ch\xE3o_16": -1773905654
-      "Tileset_ch\xE3o_17": 356227064
-      "Tileset_ch\xE3o_18": -217055805
-      "Tileset_ch\xE3o_19": 941813687
-      "Tileset_ch\xE3o_2": -2117754575
-      "Tileset_ch\xE3o_20": 1108152668
-      "Tileset_ch\xE3o_21": -784350937
-      "Tileset_ch\xE3o_22": 515306095
-      "Tileset_ch\xE3o_23": -1840889804
-      "Tileset_ch\xE3o_24": -508096952
-      "Tileset_ch\xE3o_3": 193643962
-      "Tileset_ch\xE3o_4": -318704270
-      "Tileset_ch\xE3o_5": -1130068026
-      "Tileset_ch\xE3o_6": -1897136125
-      "Tileset_ch\xE3o_7": -486742536
-      "Tileset_ch\xE3o_8": -1981127290
-      "Tileset_ch\xE3o_9": 874270347
+      "Tileset_ch\xE3o_0": 4397327511771718231
+
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
