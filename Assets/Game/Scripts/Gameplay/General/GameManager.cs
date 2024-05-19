@@ -12,10 +12,11 @@ public class GameManager : MonoBehaviour
     private MusicManager musicManager;
     public List<MoveScript> moveScripts;
     public Breath breath;
-    public float bpm, inputDelay, inputErrorTime;
+    public float bpm, lastBeatTime;
     [Range(0f, 1f)]
     public float breathPoints;
-    public bool moveBool;
+    // Adicionando uma variável para a tolerância de erro no movimento do jogador
+    public float playerMoveTolerance, beatInterval;
     public Text text;
 
     private void Awake()
@@ -39,18 +40,33 @@ public class GameManager : MonoBehaviour
         moveScripts = FindObjectsByType<MoveScript>(FindObjectsSortMode.None).ToList();
         currentscene = SceneManager.GetActiveScene().buildIndex;
         //SetTimerMovement();
-        //PauseGame();
-        //ResumeGame();
-        StartDanceRoutine();
-        
+        PauseGame();
+        ResumeGame();
+        beatInterval = 60f / bpm;
+
         counter = 0;
     }
 
     void StartDanceRoutine()
     {
-        float beatInterval = 60f / bpm;
         musicManager.ResumeMusic();
-        InvokeRepeating(nameof(PerformMove), 0, beatInterval);
+        InvokeRepeating(nameof(PerformMove), beatInterval, beatInterval);
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    public void ResumeGame()
+    {
+        StartCoroutine(ResumeCO());
+    }
+
+    IEnumerator ResumeCO()
+    {
+        yield return new WaitForSecondsRealtime(3);
+        Time.timeScale = 1;
+        StartDanceRoutine();
     }
 
     void PerformMove()
@@ -61,21 +77,19 @@ public class GameManager : MonoBehaviour
         {
             counter = 0;
         }
-        moveBool = true;
+
         breath.DecreaseBreath(breathPoints);
 
         foreach (MoveScript move in moveScripts)
         {
-            //move.Move();
+            move.Move();
             if (move.gameObject.GetComponent<EnemyScript>() != null)
             {
-                //move.gameObject.GetComponent<EnemyScript>().EnemyMove();
+                move.gameObject.GetComponent<EnemyScript>().EnemyMove();
             }
         }
-
-        moveBool = false;
+        lastBeatTime = musicManager.GetMusicTime();
     }
-
     private void SetTimerMovement()
     {
         switch (currentscene)

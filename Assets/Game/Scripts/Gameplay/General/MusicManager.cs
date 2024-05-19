@@ -19,4 +19,8 @@ public class MusicManager : MonoBehaviour
     {
         audioSource.Pause();
     }
+    public float GetMusicTime()
+    {
+        return audioSource.time;
+    }
 }

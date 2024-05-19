@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c201e78155f3ba245afecc0978999dc9, type: 3}
   m_Name: FrontFrontBack
   m_EditorClassIdentifier: 
-  movementList: []
+  movementList:
+  - {x: -1, y: 0}
+  - {x: 1, y: 0}

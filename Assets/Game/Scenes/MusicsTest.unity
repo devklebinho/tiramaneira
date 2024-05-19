@@ -4233,16 +4233,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed3b447f3e71e049b42446b9ae97ee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveScripts:
-  - {fileID: 1765070829}
-  - {fileID: 1454260515}
-  - {fileID: 3105341009997014538}
+  moveScripts: []
   breath: {fileID: 0}
   bpm: 147
-  inputDelay: 0
-  inputErrorTime: 0
+  lastBeatTime: 0
   breathPoints: 0
-  moveBool: 0
+  playerMoveTolerance: 0.1
+  beatInterval: 0
   text: {fileID: 1920597703}
 --- !u!4 &795147315
 Transform:
@@ -4413,17 +4410,6 @@ Transform:
   - {fileID: 171504334}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1454260515 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3105341010430371038, guid: fef5c27273e51ed4997ee9a921f602d4, type: 3}
-  m_PrefabInstance: {fileID: 329556240}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d404f41ea37ceae4494fd604d0a3788f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1497645261
 GameObject:
   m_ObjectHideFlags: 0
@@ -4967,8 +4953,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -223, y: 58}
-  m_SizeDelta: {x: 308.74, y: 296.42}
+  m_AnchoredPosition: {x: 834, y: -459.76}
+  m_SizeDelta: {x: 167.13, y: 160.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1920597703
 MonoBehaviour:
