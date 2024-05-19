@@ -86,7 +86,7 @@ public class PlayerScript : MonoBehaviour
             if (ableToWalk && withoutObstacles)
             {
                 moveScriptInstance.receptMove(moveInput);
-                yield return new WaitForSeconds(GameManager.InstanceManager.bps);
+                yield return new WaitForSeconds(GameManager.InstanceManager.inputErrorTime);
                 myAnimator.SetTrigger("WalkAnim");
                 moveInput = Vector2.zero;
                 moveScriptInstance.receptMove(moveInput);

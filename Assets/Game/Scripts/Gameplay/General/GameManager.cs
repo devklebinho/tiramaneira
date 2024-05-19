@@ -10,15 +10,16 @@ public class GameManager : MonoBehaviour
 {
     int currentscene;
     private static GameManager managerInstance;
+    private MusicManager musicManager;
     public List<MoveScript> moveScripts;
     public Breath breath;
-    public float bps, inputDelay;
+    public float bpm, inputDelay, inputErrorTime;
     [Range(0f, 1f)]
     public float breathPoints;//NEW: Pontos de f�lego para decrementar a cada beat da m�sica
     public bool moveBool;
 
     private void Awake()
-    {        
+    {
         if (managerInstance == null)
         {
             managerInstance = this;
@@ -31,32 +32,63 @@ public class GameManager : MonoBehaviour
     public static GameManager InstanceManager { get { return GameManager.managerInstance; } }
     void Start()
     {
+        musicManager = GetComponent<MusicManager>();
         breath = FindFirstObjectByType<Breath>();
         moveScripts = FindObjectsByType<MoveScript>(FindObjectsSortMode.None).ToList();
         currentscene = SceneManager.GetActiveScene().buildIndex;
         SetTimerMovement();
-        StartCoroutine(DanceRoutine());
+        PauseGame();
+        ResumeGame();
     }
     IEnumerator DanceRoutine()
     {
-        yield return new WaitForSeconds(bps);
-        moveBool = true;    
-        yield return new WaitForSeconds(inputDelay);
+        moveBool = true;
+        //yield return new WaitForSeconds(inputDelay);
         breath.DecreaseBreath(breathPoints);//NEW: decrementa ponto de f�lego conforme o beat da m�sica.
+        yield return new WaitForSeconds(60/bpm);
+        
         foreach (MoveScript move in moveScripts)
         {
-            move.Move();            
+            move.Move();
+            if (move.gameObject.GetComponent<EnemyScript>() != null)
+            {
+                move.gameObject.GetComponent<EnemyScript>().EnemyMove();
+            }
             moveBool = false;
         }
         StartCoroutine(DanceRoutine());
     }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    public void ResumeGame()
+    {
+        StartCoroutine(ResumeGameCO());
+    }
+
+    IEnumerator ResumeGameCO()
+    {
+        //3
+        yield return new WaitForSecondsRealtime(60/bpm);
+        //2
+        yield return new WaitForSecondsRealtime(60/bpm);
+        //1
+        yield return new WaitForSecondsRealtime(60/bpm);
+        Time.timeScale = 1;
+        StartCoroutine(DanceRoutine());
+        yield return new WaitForSecondsRealtime(60/bpm);
+        musicManager.ResumeMusic();
+    }
+
     private void SetTimerMovement()
     {
         switch (currentscene)
         {
             case 1:
-                bps = 0.5f;
-                inputDelay = 0.5f;
+                //bps = 0.5f;
+                //inputDelay = 0.5f;
                 break;
             case 2:
                 break;
