@@ -59,6 +59,10 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         ConstantBoudaries();
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GetComponent<SpriteRenderer>().enabled = !GetComponent<SpriteRenderer>().enabled;
+        }
     }
     void OnMovement(InputValue value)
     {
