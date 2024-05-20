@@ -28,6 +28,7 @@ public class PlayerScript : MonoBehaviour
     private MoveScript moveScriptInstance;
     private Breath breath;
     private MusicManager musicManager;
+    public Transform checkObstacle;
 
     void Start()
     {
@@ -71,24 +72,16 @@ public class PlayerScript : MonoBehaviour
         moveInput = value.Get<Vector2>();
         MovePlayer();
     }
+    private void OnCollisionEnter2D(Collision2D other) {
+        
+    }
     public void MovePlayer()
     {
         if (moveInput != Vector2.zero)
         {
+            checkObstacle.position = transform.position + new Vector3(moveInput.x,moveInput.y,0);
             var nextMove = (Vector2)transform.position + moveInput;
 
-            foreach (var positionsObstacles in obstaclesGameObjectsVectors)
-            {
-                if (nextMove == (Vector2)positionsObstacles)
-                {
-                    withoutObstacles = false;
-                    break;
-                }
-                else
-                {
-                    withoutObstacles = true;
-                }
-            }
             //Debug.Log(musicManager.GetMusicTime() < GameManager.InstanceManager.lastBeatTime + GameManager.InstanceManager.beatInterval - GameManager.InstanceManager.playerMoveTolerance);
             bool canMove = musicManager.GetMusicTime() < GameManager.InstanceManager.lastBeatTime + GameManager.InstanceManager.beatInterval - GameManager.InstanceManager.playerMoveTolerance;
 
