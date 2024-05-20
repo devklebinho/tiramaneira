@@ -17,7 +17,7 @@ TagManager:
   - Player
   - Inhaler
   - Obstacles
-  - 
+  - NextLevel
   - 
   - 
   - 
@@ -46,11 +46,11 @@ TagManager:
   - name: Background
     uniqueID: 210218291
     locked: 0
-  - name: Enemies
-    uniqueID: 2244115515
-    locked: 0
   - name: Obstacles
     uniqueID: 2615884579
+    locked: 0
+  - name: Enemies
+    uniqueID: 2244115515
     locked: 0
   - name: Inhaler
     uniqueID: 92516725
