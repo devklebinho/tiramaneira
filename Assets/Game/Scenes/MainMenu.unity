@@ -6719,7 +6719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266196773031089159, guid: 28f7839c1d1ff7242ab4ed2b32d9c8be, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Fase1
+      value: Cena1
       objectReference: {fileID: 0}
     - target: {fileID: 2266196773031089159, guid: 28f7839c1d1ff7242ab4ed2b32d9c8be, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
