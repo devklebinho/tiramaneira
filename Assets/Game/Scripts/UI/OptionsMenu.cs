@@ -14,14 +14,27 @@ public class OptionsMenu : MonoBehaviour
 
     [Header("Audio Settings")]
     [SerializeField] AudioMixer audioMixer;
-    [SerializeField] Slider masterVolumeSlider;
-    [SerializeField] Slider musicVolumeSlider;
-    [SerializeField] Slider sfxVolumeSlider;
+    [SerializeField] Slider masterSlider, musicSlider, sfxSlider;
+    [SerializeField] TMP_Text masterLabel, musicLabel, sfxLabel;
+    private const float MasterOffset = 80f, MusicOffset = 80f, SFXOffset = 80f;
 
     void Start()
     {
+        SetInitialGraphicsSettings();
+        SetInitialAudioSettings();
+    }
+
+    void Update()
+    {
+        
+    }
+
+    #region Graphics Settings
+
+    public void SetInitialGraphicsSettings()
+    {
         fullscreenToggle.isOn = Screen.fullScreen;
-        if(QualitySettings.vSyncCount == 0)
+        if (QualitySettings.vSyncCount == 0)
             vSyncToggle.isOn = false;
         else
             vSyncToggle.isOn = true;
@@ -31,12 +44,6 @@ public class OptionsMenu : MonoBehaviour
         txtResolutionFormat.text = Screen.width + "x" + Screen.height;
     }
 
-    void Update()
-    {
-        
-    }
-
-    #region Graphics
     public void ApplyGraphics()
     {
         Debug.Log("Apply Graphics");
@@ -67,7 +74,37 @@ public class OptionsMenu : MonoBehaviour
     }
     #endregion
 
+    #region Audio Settings
 
+    public void SetInitialAudioSettings()
+    {
+        SetVolume(masterSlider, masterLabel, "MasterVol", MasterOffset);
+        SetVolume(musicSlider, musicLabel, "MusicVol", MusicOffset);
+        SetVolume(sfxSlider, sfxLabel, "SFXVol", SFXOffset);
+    }
+
+    public void SetMasterVol()
+    {
+        SetVolume(masterSlider, masterLabel, "MasterVol", MasterOffset);
+    }
+
+    public void SetMusicVol()
+    {
+        SetVolume(musicSlider, musicLabel, "MusicVol", MusicOffset);
+    }
+
+    public void SetSFXVol()
+    {
+        SetVolume(sfxSlider, sfxLabel, "SFXVol", SFXOffset);
+    }
+
+    private void SetVolume(Slider slider, TMP_Text label, string parameterName, float offset)
+    {
+        label.text = (slider.value + offset).ToString();
+        audioMixer.SetFloat(parameterName, slider.value);
+    }
+
+#endregion
 
 }
 
