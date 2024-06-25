@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -134, y: -161}
+  m_AnchoredPosition: {x: -134, y: -198}
   m_SizeDelta: {x: 768, y: 335.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &55687886
@@ -1767,10 +1767,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1864923216}
   m_HandleRect: {fileID: 2140846529}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 10
-  m_WholeNumbers: 1
-  m_Value: -5
+  m_MinValue: 0.0001
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4380,10 +4380,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1248872337}
   m_HandleRect: {fileID: 1675922372}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 10
-  m_WholeNumbers: 1
-  m_Value: -5
+  m_MinValue: 0.0001
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -5346,10 +5346,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 283820492}
   m_HandleRect: {fileID: 275691993}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 10
-  m_WholeNumbers: 1
-  m_Value: -5
+  m_MinValue: 0.0001
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -5589,7 +5589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2073792088
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5654,18 +5654,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1741453952}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: CloseOptions
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1986418111}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play

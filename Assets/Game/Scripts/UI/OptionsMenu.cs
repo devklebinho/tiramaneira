@@ -76,30 +76,28 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetInitialAudioSettings()
     {
-        audioMixer.SetFloat("MasterVol", -5f);
-        audioMixer.SetFloat("MusicVol", -5f);
-        audioMixer.SetFloat("SFXVol", -5f);
+        
     }
 
     public void SetMasterVol()
     {
-        SetVolume(masterSlider, "MasterVol");
+        SetVolume("MasterVol", masterSlider);
     }
 
     public void SetMusicVol()
     {
-        SetVolume(musicSlider, "MusicVol");
+        SetVolume("MusicVol", musicSlider);
     }
 
     public void SetSFXVol()
     {
-        SetVolume(sfxSlider, "SFXVol");
+        SetVolume("SFXVol", sfxSlider);
     }
 
     //Set Volume
-    private void SetVolume(Slider slider, string parameterName)
+    private void SetVolume(string parameterName, Slider slider)
     {
-        audioMixer.SetFloat(parameterName, slider.value);
+        audioMixer.SetFloat(parameterName, Mathf.Log10(slider.value) * 20f);
     }
 
 #endregion
