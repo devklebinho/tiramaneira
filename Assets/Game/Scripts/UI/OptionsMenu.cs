@@ -82,6 +82,8 @@ public class OptionsMenu : MonoBehaviour
     public void SetMasterVol()
     {
         SetVolume("MasterVol", masterSlider);
+        musicSlider.value = masterSlider.value;
+        sfxSlider.value = masterSlider.value;
     }
 
     public void SetMusicVol()
