@@ -15,8 +15,6 @@ public class OptionsMenu : MonoBehaviour
     [Header("Audio Settings")]
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] Slider masterSlider, musicSlider, sfxSlider;
-    [SerializeField] TMP_Text masterLabel, musicLabel, sfxLabel;
-    private const float MasterOffset = 80f, MusicOffset = 80f, SFXOffset = 80f;
 
     void Start()
     {
@@ -78,29 +76,29 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetInitialAudioSettings()
     {
-        SetVolume(masterSlider, masterLabel, "MasterVol", MasterOffset);
-        SetVolume(musicSlider, musicLabel, "MusicVol", MusicOffset);
-        SetVolume(sfxSlider, sfxLabel, "SFXVol", SFXOffset);
+        audioMixer.SetFloat("MasterVol", -5f);
+        audioMixer.SetFloat("MusicVol", -5f);
+        audioMixer.SetFloat("SFXVol", -5f);
     }
 
     public void SetMasterVol()
     {
-        SetVolume(masterSlider, masterLabel, "MasterVol", MasterOffset);
+        SetVolume(masterSlider, "MasterVol");
     }
 
     public void SetMusicVol()
     {
-        SetVolume(musicSlider, musicLabel, "MusicVol", MusicOffset);
+        SetVolume(musicSlider, "MusicVol");
     }
 
     public void SetSFXVol()
     {
-        SetVolume(sfxSlider, sfxLabel, "SFXVol", SFXOffset);
+        SetVolume(sfxSlider, "SFXVol");
     }
 
-    private void SetVolume(Slider slider, TMP_Text label, string parameterName, float offset)
+    //Set Volume
+    private void SetVolume(Slider slider, string parameterName)
     {
-        label.text = (slider.value + offset).ToString();
         audioMixer.SetFloat(parameterName, slider.value);
     }
 
