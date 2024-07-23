@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControls",
+    "name": "PlayerMovement",
     "maps": [
         {
             "name": "Player",
@@ -9,7 +9,7 @@
                     "name": "Movement",
                     "type": "Value",
                     "id": "db2997b5-21e4-43ab-bfa8-466ea26d8b5c",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -17,7 +17,7 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "WASD",
                     "id": "2809e0ee-e23b-4a24-a405-5ece5be70f56",
                     "path": "2DVector",
                     "interactions": "",
