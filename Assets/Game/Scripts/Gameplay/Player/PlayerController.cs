@@ -12,9 +12,12 @@ public class PlayerControler : MonoBehaviour
 
     private PlayerMovement controls;
 
+    private BoxCollider2D boxCollider2D;
+
     private void Awake()
     {
         controls = new PlayerMovement();
+        boxCollider2D = new BoxCollider2D();
     }
 
     private void OnEnable()
